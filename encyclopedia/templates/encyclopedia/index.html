@@ -1,12 +1,19 @@
 {% extends "encyclopedia/layout.html" %} {% block title %} {{title}}
 {%endblock%} {% block body %}
 <h1>All Pages</h1>
-
+<a href="{% url 'encyclopedia:display' title='CSS' %}">micla</a>
+<p>le't see if my changes show up</p>
 <ul>
   <!-- understand where I am getting the eneteries list in this example probably given in the function that renders this file from views -->
   {% for entry in entries %}
-  <li>{{ entry }}</li>
+  <li>
+    <!-- NOTE: this is another suggested method for achiveing the same thing -->
+    <!-- <a href="{% url 'encyclopedia:display' title=entry %}">{{ entry }}</a> -->
+    <a href="/{{ entry }}">{{ entry }}</a>
+  </li>
   {% endfor %}
 </ul>
 
 {% endblock %}
+
+<!-- TODO: Index Page: Update index.html such that, instead of merely listing the names of all pages in the encyclopedia, user can click on any entry name to be taken directly to that entry page. -->

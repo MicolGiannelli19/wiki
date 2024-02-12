@@ -18,16 +18,19 @@
       <div class="sidebar col-lg-2 col-md-3">
         <h2>Wiki</h2>
         <!-- We can replace this with a django form explenation on how to do this at min 1:20 -->
-        <form>
+        <!-- find out if the action refers to the url the information is going to or in  -->
+        <form method="post" action="{% url 'encyclopedia:search' %}">
+          {% csrf_token %}
           <input
             class="search"
             type="text"
-            name="q"
+            name="query"
             placeholder="Search Encyclopedia"
           />
+          <button type="submit">Search</button>
         </form>
         <div>
-          <a href="{% url 'index' %}">Home</a>
+          <a href="{% url 'encyclopedia:index' %}">Home</a>
         </div>
         <div>Create New Page</div>
         <div>Random Page</div>

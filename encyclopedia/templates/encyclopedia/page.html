@@ -1,12 +1,9 @@
-{% extends "encyclopedia/layout.html" %} {% block title %} {{title}}{%endblock%}
-{% block body %}
-<h1>All Pages</h1>
+{% extends "encyclopedia/layout.html" %} {% block title %} {{title}}
+{%endblock%} {% block body %}
+<h1>Checking it is actually displaying this page</h1>
 
 <ul>
   <!-- understand where I am getting the eneteries list in this example probably given in the function that renders this file from views -->
-  {% for entry in entries %}
   <li>{{ entry }}</li>
-  {% endfor %}
 </ul>
-
 {% endblock %}
