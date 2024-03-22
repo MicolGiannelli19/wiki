@@ -11,7 +11,11 @@ class NewSearchForm(forms.Form):
 
 
 def index(request):
-    return render(request, "encyclopedia/index.html", {"entries": util.list_entries()})
+    return render(
+        request,
+        "encyclopedia/index.html",
+        {"entries": util.list_entries(), "title": "Home Page"},
+    )
     # return HttpResponse("HELLO WORLD")
 
 
@@ -30,12 +34,27 @@ def display_entery_page(request, title):
     )
 
 
+# should this be a django form or a simple html form?
 def search(request):
     if request.method == "POST":
         # Get the form data
         search_query = request.POST.get("query", "")
-        print("Search query:", search_query)
-        return HttpResponse("Search query:", search_query)
+        if search_query in util.list_entries():
+            return display_entery_page(request, search_query)
+        else:
+            return render(
+                request,
+                "encyclopedia/index.html",
+                {
+                    "entries": [
+                        element
+                        for element in util.list_entries()
+                        if search_query in element
+                    ],
+                    "title": "Search Results",
+                },
+            )
+
     # if request.method == "POST":
     #     search_form = NewSearchForm(request.POST)
     #     print(search_form)

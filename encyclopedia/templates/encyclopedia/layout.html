@@ -19,7 +19,7 @@
         <h2>Wiki</h2>
         <!-- We can replace this with a django form explenation on how to do this at min 1:20 -->
         <!-- find out if the action refers to the url the information is going to or in  -->
-        <form method="post" action="{% url 'encyclopedia:search' %}">
+        <form action="{% url 'encyclopedia:search' %}" method="post">
           {% csrf_token %}
           <input
             class="search"

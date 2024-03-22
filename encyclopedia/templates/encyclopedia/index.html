@@ -1,8 +1,6 @@
 {% extends "encyclopedia/layout.html" %} {% block title %} {{title}}
 {%endblock%} {% block body %}
-<h1>All Pages</h1>
-<a href="{% url 'encyclopedia:display' title='CSS' %}">micla</a>
-<p>le't see if my changes show up</p>
+<h1>{{title}}</h1>
 <ul>
   <!-- understand where I am getting the eneteries list in this example probably given in the function that renders this file from views -->
   {% for entry in entries %}
