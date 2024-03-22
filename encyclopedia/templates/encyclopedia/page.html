@@ -1,9 +1,4 @@
 {% extends "encyclopedia/layout.html" %} {% block title %} {{title}}
 {%endblock%} {% block body %}
-<h1>Checking it is actually displaying this page</h1>
-
-<ul>
-  <!-- understand where I am getting the eneteries list in this example probably given in the function that renders this file from views -->
-  <li>{{ entry }}</li>
-</ul>
-{% endblock %}
+<!-- Note had to add this linek because HTML was not being rendered thsi should be found in some templating configurations -->
+{{ entry | safe }} {% endblock %}

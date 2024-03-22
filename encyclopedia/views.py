@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from markdown2 import markdown
 
 from . import util
 from django import forms
@@ -14,14 +15,18 @@ def index(request):
     # return HttpResponse("HELLO WORLD")
 
 
-def display(request, title):
+def display_entery_page(request, title):
     # TODO: find the appropiate place to return an error if the entry does not exist
     # TODO: If an entry is requested that does not exist, the user should be presented with an error page indicating that their requested page was not found.
     # TODO: find out how display the markdown content as html
+    markdown_content = markdown(util.get_entry(title))
+    if title not in util.list_entries():
+        # TODO: find out if you should render an error page or jsut  this http response
+        return HttpResponse("ERROR: Entry not found")
     return render(
         request,
         "encyclopedia/page.html",
-        {"entry": util.get_entry(title), "title": title},
+        {"entry": markdown_content, "title": title},
     )
 
 

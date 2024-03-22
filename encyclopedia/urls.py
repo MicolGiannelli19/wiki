@@ -8,5 +8,5 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("micla", views.micla, name="micla"),
     path("search", views.search, name="search"),
-    path("<str:title>", views.display, name="display"),
+    path("<str:title>", views.display_entery_page, name="display"),
 ]
