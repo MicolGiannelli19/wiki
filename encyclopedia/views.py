@@ -55,19 +55,9 @@ def search(request):
                 },
             )
 
-    # if request.method == "POST":
-    #     search_form = NewSearchForm(request.POST)
-    #     print(search_form)
-    #     if search_form.is_valid():
-    #         search = search_form.cleaned_data["form"]
-    #         display(request, search_form)
-    # elif request.method == "GET":
-    #     search_form = NewSearchForm()
-    #     return render(request, "encyclopedia/layout.html", {"search_form": search_form})
-    # else:
-    #     return HttpResponse("ERROR")
 
-
-# Basic function for debugging as I understand django
-def micla(request):
-    return HttpResponse("MICLA")
+# NOTE: this could also be achieved by repurposing the search function or maybe having a load page function which is called by both
+def random_page(request):
+    #  TODO: edit this to be a random page
+    random_page = "CSS"
+    return display_entery_page(request, random_page)

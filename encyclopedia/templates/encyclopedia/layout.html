@@ -17,8 +17,6 @@
     <div class="row">
       <div class="sidebar col-lg-2 col-md-3">
         <h2>Wiki</h2>
-        <!-- We can replace this with a django form explenation on how to do this at min 1:20 -->
-        <!-- find out if the action refers to the url the information is going to or in  -->
         <form action="{% url 'encyclopedia:search' %}" method="post">
           {% csrf_token %}
           <input
@@ -33,7 +31,12 @@
           <a href="{% url 'encyclopedia:index' %}">Home</a>
         </div>
         <div>Create New Page</div>
-        <div>Random Page</div>
+        <div>
+          Random Page
+          <!-- TODO : like this I am linking it to a page how do I link it to go wherever the function tells it to go is it just about needing a token  -->
+          <!-- <a href="{% url 'encyclopedia:random'%}">Random Page</a>
+          <a href="{% url 'encyclopedia:index' %}">Home</a> -->
+        </div>
         <!-- Note this is the bock that allows our html file to be editable, this block might change depending on what we are using it for -->
         {% block nav %} {% endblock %}
       </div>
