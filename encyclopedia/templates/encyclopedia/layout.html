@@ -30,12 +30,10 @@
         <div>
           <a href="{% url 'encyclopedia:index' %}">Home</a>
         </div>
-        <div>Create New Page</div>
+        <a href="{% url 'encyclopedia:new_page' %}">New Page</a>
         <div>
-          Random Page
           <!-- TODO : like this I am linking it to a page how do I link it to go wherever the function tells it to go is it just about needing a token  -->
-          <!-- <a href="{% url 'encyclopedia:random'%}">Random Page</a>
-          <a href="{% url 'encyclopedia:index' %}">Home</a> -->
+          <a href="{% url 'encyclopedia:random' %}">Random Page</a>
         </div>
         <!-- Note this is the bock that allows our html file to be editable, this block might change depending on what we are using it for -->
         {% block nav %} {% endblock %}

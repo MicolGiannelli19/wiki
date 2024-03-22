@@ -56,8 +56,39 @@ def search(request):
             )
 
 
+def micla3(request):
+    return HttpResponse("Hello, Micla3")
+
+
+import random
+
+
 # NOTE: this could also be achieved by repurposing the search function or maybe having a load page function which is called by both
 def random_page(request):
-    #  TODO: edit this to be a random page
-    random_page = "CSS"
+    random_page = random.choice(util.list_entries())
     return display_entery_page(request, random_page)
+
+
+def new_page(request):
+    return render(
+        request,
+        "encyclopedia/new_page.html",
+        {"form": NewSearchForm()},
+    )
+    # NOTE I think this is the correct way of doinf it
+    # if request.method == "POST":
+    #     form = NewSearchForm(request.POST)
+    #     if form.is_valid():
+    #         task = form.cleaned_data["task"]
+    #         return render(
+    #             request,
+    #             "encyclopedia/new_page.html",
+    #             {"form": form},
+    #         )
+    # else:
+    #     form = NewSearchForm()
+    # return render(
+    #     request,
+    #     "encyclopedia/new_page.html",
+    #     {"form": form},
+    # )
