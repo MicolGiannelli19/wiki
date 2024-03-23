@@ -1,13 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from markdown2 import markdown
 
 from . import util
 from django import forms
-
-
-class NewSearchForm(forms.Form):
-    task = forms.CharField(label="Search")
 
 
 def index(request):
@@ -69,26 +66,76 @@ def random_page(request):
     return display_entery_page(request, random_page)
 
 
+class EntryForm(forms.Form):
+    title = forms.CharField(label="Title")
+    content = forms.CharField(widget=forms.Textarea(), label="Content")
+
+
 def new_page(request):
-    return render(
-        request,
-        "encyclopedia/new_page.html",
-        {"form": NewSearchForm()},
-    )
-    # NOTE I think this is the correct way of doinf it
-    # if request.method == "POST":
-    #     form = NewSearchForm(request.POST)
-    #     if form.is_valid():
-    #         task = form.cleaned_data["task"]
-    #         return render(
-    #             request,
-    #             "encyclopedia/new_page.html",
-    #             {"form": form},
-    #         )
-    # else:
-    #     form = NewSearchForm()
-    # return render(
-    #     request,
-    #     "encyclopedia/new_page.html",
-    #     {"form": form},
-    # )
+    # Subitting a new form
+    if request.method == "POST":
+
+        # Take in the data the user submitted and save it as form
+        form = EntryForm(request.POST)
+
+        # Check if form data is valid (server-side)
+        if form.is_valid():
+
+            # Isolate the task from the 'cleaned' version of form data
+            title = form.cleaned_data["title"]
+            content = form.cleaned_data["content"]
+
+            # Append title to the content
+            content = f"#{title}\n\n{content}"
+
+            # Add the new task to our list of tasks
+            # TODO: Maybe shoudl catch it in a nicer way
+            if title in util.list_entries():
+                return HttpResponse("ERROR: Entry already exists")
+
+            # Save the new entry
+            util.save_entry(title, content)
+
+            # line for debugging outupt
+            # return HttpResponse(f"Title: {title} Content: {content}, {typecontent} ")
+
+            # Redirect user to list of tasks
+            return HttpResponseRedirect(reverse("tasks:index"))
+        else:
+            # If the form is invalid, re-render the page with existing information.
+            return render(request, "tasks/add.html", {"form": form})
+    else:
+        return render(
+            request,
+            "encyclopedia/new_page.html",
+            {"form": EntryForm()},
+        )
+
+
+def edit_page(request, title):
+    if request.method == "POST":
+        # Take in the data the user submitted and save it as form
+        form = EntryForm(request.POST)
+
+        # Check if form data is valid (server-side)
+        if form.is_valid():
+
+            # Isolate the task from the 'cleaned' version of form data
+            title = form.cleaned_data["title"]
+            content = form.cleaned_data["content"]
+
+            # Append title to the content
+            util.save_entry(title, content)
+
+        return display_entery_page(request, title)
+
+    else:
+        entry = util.get_entry(title)
+
+        entry_form = EntryForm({"title": title, "content": entry})
+        # return HttpResponse(f"calling the edit page function for title: {title}")
+        return render(
+            request, "encyclopedia/edit.html", {"title": title, "form": entry_form}
+        )
+        # return render("encyclopedia/new_page.html", {"form": entry_form})
+        # Add the new task to our list of tasks

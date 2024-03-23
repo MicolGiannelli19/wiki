@@ -1,4 +1,9 @@
 {% extends "encyclopedia/layout.html" %} {% block title %} {{title}}
 {%endblock%} {% block body %}
 <!-- Note had to add this linek because HTML was not being rendered thsi should be found in some templating configurations -->
-{{ entry | safe }} {% endblock %}
+{{ entry | safe }}
+  <a href="{{title}}/edit">
+    <button>Edit</button>
+  </a>
+  {% endblock %}
+</a>
