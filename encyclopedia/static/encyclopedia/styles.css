@@ -10,6 +10,7 @@ code {
 h1 {
     margin-top: 0px;
     padding-top: 20px;
+    color: red;
 }
 
 textarea {
@@ -18,14 +19,79 @@ textarea {
 }
 
 .main {
-    padding: 10px;
+    padding: 20px;
 }
 
-.search {
+.search-form {
     width: 100%;
-    font-size: 15px;
-    line-height: 15px;
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-container {
+    background-color: white;
+    display: flex;
+    padding: 30px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .form-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 20px;
+  }
+
+    .form-container input[type="text"], 
+    .form-container textarea {
+      width: 150%;
+      height: min-content;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+      margin: 10px;
+    }
+
+  .search-input {
+    width: 80%;
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    font-size: 10px;
+    margin-right: 10px;
+  }
+  
+  .search-button {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-button:hover {
+    background-color: #0056b3;
+  }
+  
 
 .sidebar {
     background-color: #f0f0f0;
