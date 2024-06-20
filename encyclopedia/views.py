@@ -53,10 +53,6 @@ def search(request):
             )
 
 
-def micla3(request):
-    return HttpResponse("Hello, Micla3")
-
-
 import random
 
 
@@ -88,7 +84,6 @@ def new_page(request):
             # Append title to the content
             content = f"#{title}\n\n{content}"
 
-            # Add the new task to our list of tasks
             # TODO: Maybe shoudl catch it in a nicer way
             if title in util.list_entries():
                 return HttpResponse("ERROR: Entry already exists")
@@ -100,10 +95,10 @@ def new_page(request):
             # return HttpResponse(f"Title: {title} Content: {content}, {typecontent} ")
 
             # Redirect user to list of tasks
-            return HttpResponseRedirect(reverse("tasks:index"))
+            return HttpResponseRedirect(reverse("encyclopedia:index"))
         else:
             # If the form is invalid, re-render the page with existing information.
-            return render(request, "tasks/add.html", {"form": form})
+            return render(request, "encyclopedia/new_page.html", {"form": form})
     else:
         return render(
             request,
@@ -120,7 +115,7 @@ def edit_page(request, title):
         # Check if form data is valid (server-side)
         if form.is_valid():
 
-            # Isolate the task from the 'cleaned' version of form data
+            # Isolate the entry from the 'cleaned' version of form data
             title = form.cleaned_data["title"]
             content = form.cleaned_data["content"]
 
@@ -138,4 +133,3 @@ def edit_page(request, title):
             request, "encyclopedia/edit.html", {"title": title, "form": entry_form}
         )
         # return render("encyclopedia/new_page.html", {"form": entry_form})
-        # Add the new task to our list of tasks
