@@ -6,6 +6,8 @@ from markdown2 import markdown
 from . import util
 from django import forms
 
+# TODO: the search functionality should definetly not be case sensitive 
+# BUG: editing  a page does not delete the old one 
 
 def index(request):
     return render(
@@ -13,7 +15,6 @@ def index(request):
         "encyclopedia/index.html",
         {"entries": util.list_entries(), "title": "Home Page"},
     )
-    # return HttpResponse("HELLO WORLD")
 
 
 def display_entery_page(request, title):
@@ -46,7 +47,7 @@ def search(request):
                     "entries": [
                         element
                         for element in util.list_entries()
-                        if search_query in element
+                        if search_query.lower() in element.lower()
                     ],
                     "title": "Search Results",
                 },
@@ -57,6 +58,7 @@ import random
 
 
 # NOTE: this could also be achieved by repurposing the search function or maybe having a load page function which is called by both
+
 def random_page(request):
     random_page = random.choice(util.list_entries())
     return display_entery_page(request, random_page)
