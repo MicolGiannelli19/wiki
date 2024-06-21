@@ -129,12 +129,12 @@ def edit_page(request, title):
         entry = util.get_entry(title)
 
         entry_form = EntryForm({"title": title, "content": entry})
-        # return HttpResponse(f"calling the edit page function for title: {title}")
         return render(
             request, "encyclopedia/edit.html", {"title": title, "form": entry_form}
         )
-        # return render("encyclopedia/new_page.html", {"form": entry_form})
+# 
 
 def delete_page(request, title):
     util.delete_entry(title)
+    You could add in an alert here that notifies you with something like are you sure you want to dele 
     return HttpResponseRedirect(reverse("encyclopedia:index"))
