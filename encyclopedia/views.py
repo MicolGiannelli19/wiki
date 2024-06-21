@@ -16,7 +16,6 @@ def index(request):
         {"entries": util.list_entries(), "title": "Home Page"},
     )
 
-
 def display_entery_page(request, title):
     # TODO: find the appropiate place to return an error if the entry does not exist
     # TODO: If an entry is requested that does not exist, the user should be presented with an error page indicating that their requested page was not found.
@@ -135,3 +134,7 @@ def edit_page(request, title):
             request, "encyclopedia/edit.html", {"title": title, "form": entry_form}
         )
         # return render("encyclopedia/new_page.html", {"form": entry_form})
+
+def delete_page(request, title):
+    util.delete_entry(title)
+    return HttpResponseRedirect(reverse("encyclopedia:index"))

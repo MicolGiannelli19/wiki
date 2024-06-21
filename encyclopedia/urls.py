@@ -11,6 +11,6 @@ urlpatterns = [
     path("new_page", views.new_page, name="new_page"),
     path("<str:title>", views.display_entery_page, name="display"),
     path("<str:title>/edit", views.edit_page, name="edit"),
-    # path("random", views.random_page, name="random"),
+    path("<str:title>/delete", views.delete_page, name="delete")
 ]
 # TODO: find out how to actually call random page, I am not sure you want a seperate url
