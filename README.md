@@ -3,6 +3,11 @@
  This project was done as an assignment to the Harvard CS50W course. 
 
  With in it I reproduced a basic version of Wikipedia where you can add and edit enteries to showcase my newly aquired Django skills 
+# My Project
+
+This is an example project.
+
+![Example GIF](./wiki.gif)
 
 
 
@@ -59,4 +64,4 @@ to add an app to this project run:
 ```bash
 poetry run python manage.py startapp <name_of_app>
 ```
-then you must add the new app name inside the `INSTALLED_APPS` list found in the `settings.py` file found inside the project directory. (also include the urls in the main url file), this allows us to put specific logic inside specific applications                   
+then you must add the new app name inside the `INSTALLED_APPS` list found in the `settings.py` file found inside the project directory. (also include the urls in the main url file), this allows us to put specific logic inside specific applications                  
